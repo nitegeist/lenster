@@ -1,4 +1,5 @@
-import { PencilAltIcon } from '@heroicons/react/outline';
+import { MusicNoteIcon, PencilAltIcon, PhotographIcon, VideoCameraIcon } from '@heroicons/react/outline';
+import { ChatAltIcon } from '@heroicons/react/solid';
 import { t, Trans } from '@lingui/macro';
 import formatHandle from 'lib/formatHandle';
 import getAvatar from 'lib/getAvatar';
@@ -68,7 +69,7 @@ const NewPost: FC = () => {
 
   return (
     <Card className="space-y-3 p-5">
-      <div className="flex items-center space-x-3">
+      <div className="flex items-start space-x-3">
         <Image
           onError={({ currentTarget }) => {
             currentTarget.src = getAvatar(currentProfile, false);
@@ -78,16 +79,60 @@ const NewPost: FC = () => {
           onClick={() => push(`/u/${currentProfile?.handle}`)}
           alt={formatHandle(currentProfile?.handle)}
         />
-        <button
-          className="flex w-full items-center space-x-2 rounded-xl border bg-gray-100 px-4 py-2 dark:border-gray-700 dark:bg-gray-900"
-          type="button"
-          onClick={() => openModal('update')}
-        >
-          <PencilAltIcon className="h-5 w-5" />
-          <span>
-            <Trans>What's happening?</Trans>
-          </span>
-        </button>
+        <div className="flex w-full flex-col space-y-3">
+          <button
+            className="flex w-full items-center space-x-2 rounded-xl border bg-gray-100 px-4 py-2 dark:border-gray-700 dark:bg-gray-900"
+            type="button"
+            onClick={() => openModal('update')}
+          >
+            <span>
+              <Trans>What's happening?</Trans>
+            </span>
+          </button>
+          <div className="flex items-center justify-start space-x-6 text-xs">
+            <button
+              className="text-brand flex flex-col items-center space-y-2"
+              type="button"
+              onClick={() => openModal('update')}
+            >
+              <ChatAltIcon className="h-5 w-5" />
+              <Trans>Update</Trans>
+            </button>
+            <button
+              className="flex flex-col items-center space-y-2"
+              type="button"
+              onClick={() => openModal('image')}
+            >
+              <PhotographIcon className="h-5 w-5" />
+              <Trans>Image</Trans>
+            </button>
+            <button
+              className="flex flex-col items-center space-y-2"
+              type="button"
+              onClick={() => openModal('video')}
+            >
+              <VideoCameraIcon className="h-5 w-5" />
+              <Trans>Video</Trans>
+            </button>
+            <button
+              className="flex flex-col items-center space-y-2"
+              type="button"
+              onClick={() => openModal('audio')}
+            >
+              <MusicNoteIcon className="h-5 w-5" />
+              <Trans>Music</Trans>
+            </button>
+            <button
+              className="flex flex-col items-center space-y-2"
+              type="button"
+              onClick={() => openModal('article')}
+            >
+              <PencilAltIcon className="h-5 w-5" />
+              <Trans>Blog</Trans>
+            </button>
+          </div>
+        </div>
+
         <Modal
           title={t`Create post`}
           size="md"
